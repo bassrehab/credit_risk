@@ -1,0 +1,4 @@
+2021-08-29 00:31:51,004 - ERROR - Article `download()` failed with 403 Client Error: Forbidden for url: https://seekingalpha.com/article/999271-update-j-c-penney-should-listen-to-its-customers?source=all_articles_title on URL https://seekingalpha.com/article/999271-update-j-c-penney-should-listen-to-its-customers?source=all_articles_title
+2021-08-29 00:31:51,005 - INFO - Process 16978 completed successfully
+2021-08-29 00:31:51,005 - INFO - process shutting down
+2021-08-29 00:31:51,006 - INFO - process exiting with exitcode 0

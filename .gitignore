@@ -1,0 +1,6 @@
+gcp-key.json
+output/*
+.idea/*
+*.pyc
+*.csv
+*.json

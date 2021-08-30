@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  sinatraapp:
+    image: svc-news-crawler:latest
+    ports:
+    - 9090:9090
+  redis:
+    image: redis:latest

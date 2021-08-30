@@ -1,0 +1,1 @@
+queryFragments = ["bankruptcy", "rating", "debt", "stock"]
