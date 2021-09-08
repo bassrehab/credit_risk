@@ -5,9 +5,9 @@ from torch.nn import functional as F
 from collections import OrderedDict
 
 
-class _SimpleSegmentationModel(nn.Module):
+class SemSegModel(nn.Module):
     def __init__(self, backbone, classifier, aux_classifier=None):
-        super(_SimpleSegmentationModel, self).__init__()
+        super(SemSegModel, self).__init__()
         self.backbone = backbone
         self.classifier = classifier
         self.aux_classifier = aux_classifier
@@ -33,7 +33,7 @@ class _SimpleSegmentationModel(nn.Module):
 
 __all__ = ["DeepLabV3"]
 
-class DeepLabV3(_SimpleSegmentationModel):
+class DeepLabV3(SemSegModel):
     """
     Implements DeepLabV3 model from
     `"Rethinking Atrous Convolution for Semantic Image Segmentation"

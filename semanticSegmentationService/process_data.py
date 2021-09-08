@@ -8,26 +8,9 @@ import json
 from torchvision import transforms, utils
 import random
 
-class SegDataset(Dataset):
-    """Segmentation Dataset"""
+class ProcessDataset(Dataset):
     def __init__(self, root_dir, transform=None, seed=None, fraction=None, subset=None, imagecolormode='rgb'):
-        """
-        Args:
-            Create Train and Test dataloaders from two separate Train and Test folders.
-            The directory structure should be as follows.
-            data_dir
-            --Images
-            --labels.json        
-    
-            imageFolder (string) = 'Images' : Name of the folder which contains the Images.
-            maskFolder (string)  = 'Masks : Name of the folder which contains the Masks.
-            transform (callable, optional): Optional transform to be applied on a sample.
-            seed: Specify a seed for the train and test split
-            fraction: A float value from 0 to 1 which specifies the validation split fraction
-            subset: 'Train' or 'Test' to select the appropriate set.
-            imagecolormode: 'rgb' or 'grayscale'
-            maskcolormode: 'rgb' or 'grayscale'
-        """
+
         self.color_dict = {'rgb': 1, 'grayscale': 0}
         assert(imagecolormode in ['rgb', 'grayscale'])        
 
@@ -46,12 +29,8 @@ class SegDataset(Dataset):
             self.fraction = fraction
             self.labels = list(self.data.keys())
             if seed:
-                #np.random.seed(seed)
-                #indices = np.arange(len(self.labels))
-                #np.random.shuffle(indices)
                 random.seed(seed)
                 random.shuffle(self.labels)
-                #self.labels = self.labels[indices]                
             if subset == 'Train':
                 self.labels = self.labels[:int(
                     np.ceil(len(self.labels)*(1-self.fraction)))]                
@@ -61,7 +40,14 @@ class SegDataset(Dataset):
 
     def __len__(self):
         return len(self.labels)
+
     def createMask(self, reg, shp):
+        '''
+
+        @param reg:
+        @param shp:
+        @return:
+        '''
         org = np.zeros((shp),dtype=np.uint8)
         regionX = []
         regionY = []
@@ -78,13 +64,15 @@ class SegDataset(Dataset):
             pts.append(np.array(tmp))
         for i, pt in enumerate(pts):            
             cv2.fillPoly(org,[pt],col[i])
-        #cv2.imshow("out",org)
-        #cv2.waitKey(0)
-        #cv2.destroyAllWindows()
         return org
 
 
     def __getitem__(self, idx):
+        '''
+
+        @param idx:
+        @return:
+        '''
         img_id = self.labels[idx]
         img_name = self.data[img_id]['filename']
         if self.imagecolorflag:
@@ -106,9 +94,6 @@ class SegDataset(Dataset):
             sample = self.transform(sample)
 
         return sample
-
-# Define few transformations for the Segmentation Dataloader
-
 
 class Resize(object):
     """Resize image and/or masks."""
@@ -172,8 +157,8 @@ def get_dataloader_sep_folder(data_dir, maskFolder='Mask', batch_size=4):
         'Test': transforms.Compose([ToTensor(), Normalize()]),
     }
 
-    image_datasets = {x: SegDataset(root_dir=data_dir,
-                                    transform=data_transforms[x])
+    image_datasets = {x: ProcessDataset(root_dir=data_dir,
+                                        transform=data_transforms[x])
                       for x in ['Train', 'Test']}
     dataloaders = {x: DataLoader(image_datasets[x], batch_size=batch_size,
                                  shuffle=True, num_workers=0)
@@ -190,7 +175,7 @@ def get_dataloader_single_folder(data_dir, imageFolder='Images', fraction=0.2, b
         'Test': transforms.Compose([ToTensor(), Normalize()]),
     }
 
-    image_datasets = {x: SegDataset(data_dir, seed=100, fraction=fraction, subset=x, transform=data_transforms[x])
+    image_datasets = {x: ProcessDataset(data_dir, seed=100, fraction=fraction, subset=x, transform=data_transforms[x])
                       for x in ['Train', 'Test']}
     dataloaders = {x: DataLoader(image_datasets[x], batch_size=batch_size,
                                  shuffle=True, num_workers=0)
