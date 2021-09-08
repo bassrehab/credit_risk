@@ -1,4 +1,4 @@
-#Credit Default and Downgrade Prediction
+# Credit Default and Downgrade Prediction
 
 **Data Sets:** Moody's Historical Rating; Fundamental Data; Historical Stock Trades; News Articles.
 
