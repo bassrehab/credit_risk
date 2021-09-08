@@ -1,3 +1,4 @@
+# Created by Subhadip Mitra <dev@subhadipmitra.com>
 import logging
 import multiprocessing
 import os

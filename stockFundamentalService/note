@@ -1,0 +1,13 @@
+brew install ta-lib
+
+
+-
+
+On Linux:
+Download ta-lib-0.4.0-src.tar.gz and:
+http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+
+$ untar and cd
+$ ./configure --prefix=/usr
+$ make
+$ sudo make install

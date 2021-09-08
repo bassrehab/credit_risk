@@ -1,3 +1,4 @@
+# Created by Subhadip Mitra <dev@subhadipmitra.com>
 from newspaper import Article
 import sys
 
