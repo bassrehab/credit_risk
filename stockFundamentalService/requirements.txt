@@ -62,7 +62,7 @@ multitasking==0.0.9
 murmurhash==1.0.5
 networkx==2.5.1
 newspaper3k==0.2.8
-nltk==3.6.2
+nltk==3.6.4
 numexpr==2.7.3
 numpy==1.21.1
 packaging==21.0
