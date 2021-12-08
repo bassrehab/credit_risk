@@ -20,7 +20,7 @@ setup(
     include_package_data=False,
     packages=find_packages(),
     install_requires=[
-        'tensorflow==2.5.1',
+        'tensorflow==2.5.2',
         'transformers==4.8',
         'pytest',
         'scikit-learn',
