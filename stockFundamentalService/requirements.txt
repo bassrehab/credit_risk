@@ -53,7 +53,7 @@ Jinja2==3.0.1
 joblib==1.0.1
 Logbook==1.5.3
 lru-dict==1.1.7
-lxml==4.6.3
+lxml==4.6.5
 Mako==1.1.5
 MarkupSafe==2.0.1
 multidict==5.1.0
